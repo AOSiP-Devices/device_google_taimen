@@ -47,5 +47,5 @@ TARGET_RECOVERY_UI_LIB := \
 # for all future devices.
 BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=12
 
-# Allow Lineage config to override others
--include device/google/taimen/BoardConfigLineage.mk
+# Allow AOSiP config to override others
+-include device/google/taimen/BoardConfigTaimen.mk

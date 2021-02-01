@@ -15,9 +15,9 @@ VENDOR=google
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
-ANDROID_ROOT="${MY_DIR}/../../.."
+AOSIP_ROOT="${MY_DIR}/../../.."
 
-HELPER="${ANDROID_ROOT}/tools/extract-utils/extract_utils.sh"
+HELPER="${AOSIP_ROOT}/tools/extract-utils/extract_utils.sh"
 if [ ! -f "${HELPER}" ]; then
     echo "Unable to find helper script at ${HELPER}"
     exit 1
@@ -57,15 +57,15 @@ function blob_fixup() {
     case "${1}" in
     # Fix typo in qcrilmsgtunnel whitelist
     product/etc/sysconfig/nexus.xml)
-        sed -i 's/qulacomm/qualcomm/' "${2}"
+        sed -i 's/qualcomm/qualcomm/' "${2}"
         ;;
     esac
 }
 
 # Initialize the helper
-setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
+setup_vendor "${DEVICE}" "${VENDOR}" "${AOSIP_ROOT}" false "${CLEAN_VENDOR}"
 
-extract "${MY_DIR}/lineage-proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
-extract "${MY_DIR}/lineage-proprietary-files-vendor.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+extract "${MY_DIR}/device-proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+extract "${MY_DIR}/device-proprietary-files-vendor.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 
 "${MY_DIR}/setup-makefiles.sh"
